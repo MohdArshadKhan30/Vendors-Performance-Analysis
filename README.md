@@ -129,4 +129,4 @@ Open `Exploratory_Data_Analysis.ipynb` first, then `Vendor_Performance_Analysis.
 ## 🙋 Author
 
 **Mohd Arshad Khan**
-[LinkedIn](https://linkedin.com/in/yourprofile) • [GitHub](https://github.com/yourusername)
+[LinkedIn](www.linkedin.com/in/mohd-arshad-khan-470921264) • [GitHub](https://github.com/MohdArshadKhan30)
