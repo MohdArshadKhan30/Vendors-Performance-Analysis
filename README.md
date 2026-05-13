@@ -1,64 +1,132 @@
 # 📊 Vendor Performance Analysis
-### 📌 Overview
 
-This project focuses on analyzing vendor and brand performance in the retail and wholesale industry. The goal is to help businesses identify underperforming brands, optimize pricing strategies, assess bulk purchasing impact, and evaluate vendor dependency to improve profitability and inventory efficiency.
+A data-driven analysis of vendor and brand performance in the retail and wholesale industry. This project helps businesses identify underperforming brands, optimize pricing strategies, assess bulk purchasing impact, and reduce vendor dependency risk to improve overall profitability.
 
-The repository includes:
+---
 
-* Business Problem Report – a detailed document highlighting business challenges, data insights, and key findings.
+## 🎯 Business Problem
 
-* Jupyter Notebooks – Python notebooks for data preprocessing, exploratory data analysis (EDA), filtering, and visualization.
+Companies in retail and wholesale face recurring challenges:
 
-### 🎯 Business Problem
+- Losses from inefficient pricing or procurement decisions
+- Overstocking and poor inventory turnover
+- Over-reliance on a small group of vendors
+- Profitability variance between high- and low-performing vendors
 
-Effective inventory and sales management are critical for optimizing profitability. Companies often face challenges such as:
+This project addresses all four using SQL-based data extraction, Python-driven EDA, and actionable business insights.
 
-* Losses due to inefficient pricing or procurement.
+---
 
-* Overstocking and poor inventory turnover.
+## 🔍 Key Findings
 
-* Vendor dependency risks.
+| Insight | Finding |
+|---|---|
+| Brands needing promotion | 198 brands with high margins but low sales |
+| Vendor concentration risk | Top 10 vendors = 65.7% of total purchases |
+| Bulk purchase savings | 72% lower unit cost ($10.78/unit) for large orders |
+| Top vendor by sales | Diageo North America Inc. — $68M sales, $17.89M gross profit |
+| Top brand by sales | Jack Daniels No 7 Black — $7.96M |
+| Purchase price vs profit | Correlation of -0.016 — purchase price barely affects profit |
+| Sales price vs margin | Negative correlation (-0.179) — higher price shrinks margins |
+| Stock turnover vs profit | Weak correlation (-0.038) — faster turnover ≠ higher profit |
 
-* Profitability variance between high- and low-performing vendors.
+---
 
-This analysis addresses these issues by leveraging data-driven insights.
+## ⚙️ How It Works
 
-### 🔍 Key Insights
+1. **Data Ingestion** — Raw CSV files loaded into SQLite via chunked ingestion pipeline (`ingesting_db.py`)
+2. **Vendor Summary** — Multi-table SQL joins (purchases, sales, invoices) to build a unified `vendor_sales_summary` table
+3. **Feature Engineering** — Derived columns: `GrossProfit`, `ProfitMargin`, `StockTurnover`, `SalesToPurchaseRatio`
+4. **Data Cleaning** — Removed zero/negative sales, profit margins, and unsold inventory
+5. **EDA** — Distribution plots, boxplots, correlation heatmaps via Seaborn and Matplotlib
+6. **Analysis** — Answered 5 core business questions using grouped aggregations and threshold-based filtering
 
-* Brands for Pricing Adjustments: 198 brands with low sales but high margins could benefit from promotions and targeted marketing.
+---
 
-* Vendor Contribution: Top 10 vendors account for 65.7% of total purchases, showing heavy reliance on a few suppliers.
+## 🛠️ Tech Stack
 
-* Bulk Purchasing Impact: Large orders achieve 72% lower unit costs, boosting profitability.
+| Layer | Tool |
+|---|---|
+| Language | Python 3 |
+| Data Analysis | Pandas, NumPy |
+| Visualization | Matplotlib, Seaborn |
+| Database | SQLite (via sqlite3 + SQLAlchemy) |
+| Statistical Analysis | SciPy |
+| Notebook | Jupyter Notebook |
+| Data Input | CSV / Excel |
 
-* Top Vendors:
+---
 
- - Diageo North America Inc. dominates with $68M in sales and $17.89M gross profit.
+## 📁 Project Structure
 
- - Martignetti Companies follows with $39M in sales.
+```
+vendor-performance-analysis/
+├── data/                          # Raw CSV input files
+├── logs/                          # Ingestion and processing logs
+├── ingesting_db.py                # CSV → SQLite ingestion pipeline
+├── get_vendor_summary.py          # SQL joins + feature engineering
+├── Exploratory_Data_Analysis.ipynb
+├── Vendor_Performance_Analysis.ipynb
+├── vendor_sales_summary_filtered.csv
+├── Business_Problem_Report.docx   # Full findings report
+└── README.md
+```
 
-* Top Brands:
+---
 
- - Jack Daniels No 7 Black ($7.96M),
+## 📦 Installation
 
- - Tito’s Handmade Vodka ($7.40M),
+```bash
+git clone https://github.com/yourusername/vendor-performance-analysis.git
+cd vendor-performance-analysis
+pip install -r requirements.txt
+```
 
- - Grey Goose Vodka ($7.21M).
+**Requirements:**
+```
+pandas
+numpy
+matplotlib
+seaborn
+scipy
+sqlalchemy
+jupyter
+openpyxl
+```
 
-* Correlation Findings:
+---
 
- - Purchase price has minimal impact on revenue/profit.
+## 🚀 Usage
 
- - Sales prices rising often shrink profit margins.
+**Step 1 — Ingest raw data into SQLite:**
+```bash
+python ingesting_db.py
+```
 
- - Stock turnover doesn’t directly guarantee profitability.
+**Step 2 — Build vendor summary table:**
+```bash
+python get_vendor_summary.py
+```
 
-### 🛠️ Tech Stack
+**Step 3 — Run analysis notebooks:**
+```bash
+jupyter notebook
+```
+Open `Exploratory_Data_Analysis.ipynb` first, then `Vendor_Performance_Analysis.ipynb`.
 
-* Python (pandas, numpy, matplotlib, seaborn)
+---
 
-* Jupyter Notebook for analysis & visualization
+## 📊 Business Questions Answered
 
-* SQLite / SQL queries for data extraction
+1. Which brands need promotional or pricing adjustments?
+2. Which vendors contribute the most to total purchases?
+3. What is the impact of bulk purchasing on unit costs?
+4. Which vendors and brands have the strongest sales performance?
+5. How does stock turnover relate to profitability?
 
-* Excel / CSV for structured inputs
+---
+
+## 🙋 Author
+
+**Mohd Arshad Khan**
+[LinkedIn](https://linkedin.com/in/yourprofile) • [GitHub](https://github.com/yourusername)
